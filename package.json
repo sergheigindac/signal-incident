@@ -1,0 +1,21 @@
+{
+  "name": "signal-incident",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Heartbeat monitoring, incident timelines, maintenance windows, and service reliability reports.",
+  "engines": {
+    "node": ">=24.14.0 <25"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "dev": "node --watch src/main.js",
+    "test": "node --test",
+    "test:coverage": "node --test --experimental-test-coverage",
+    "check": "node scripts/check.js",
+    "cli": "node scripts/client.js",
+    "backup": "node scripts/backup.js",
+    "test:smoke": "node scripts/smoke.js"
+  },
+  "license": "MIT"
+}
