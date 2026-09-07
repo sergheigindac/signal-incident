@@ -1,4 +1,4 @@
-FROM node:24.14.0-bookworm-slim AS test
+FROM node:26.8.1-bookworm-slim AS test
 WORKDIR /app
 COPY package.json ./
 COPY src ./src
@@ -10,7 +10,7 @@ COPY scripts ./scripts
 COPY docs ./docs
 RUN node scripts/check.js && node --test
 
-FROM node:24.14.0-bookworm-slim AS runtime
+FROM node:26.8.1-bookworm-slim AS runtime
 ENV NODE_ENV=production HOST=0.0.0.0 PORT=4330 DATABASE_PATH=/app/data/application.sqlite
 WORKDIR /app
 RUN mkdir -p /app/data && chown -R node:node /app
