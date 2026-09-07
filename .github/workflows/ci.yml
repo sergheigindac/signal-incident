@@ -1,0 +1,48 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: node scripts/check.js
+      - run: node --test --experimental-test-coverage
+      - run: node scripts/smoke.js
+  container:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      API_TOKEN: ci-only-ephemeral-token-not-for-deployment
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - run: docker compose config --quiet
+      - run: docker compose up --build --wait --wait-timeout 120
+      - run: node scripts/smoke.js
+        env:
+          API_URL: http://127.0.0.1:4330
+      - name: Container logs
+        if: failure()
+        run: docker compose logs
+      - name: Clean up test container and volume
+        if: always()
+        run: docker compose down --volumes

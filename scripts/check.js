@@ -6,7 +6,7 @@ function files(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap(entry => entry.isDirectory() ? files(join(directory, entry.name)) : [join(directory, entry.name)]);
 }
 let failed = false;
-for (const filename of ['src', 'scripts', 'test', 'public'].flatMap(files).filter(name => name.endsWith('.js'))) {
+for (const filename of ['src', 'scripts', 'test', 'public', 'client'].flatMap(files).filter(name => name.endsWith('.js'))) {
   const result = spawnSync(process.execPath, ['--check', filename], { encoding: 'utf8' });
   if (result.status !== 0) { console.error(result.stderr); failed = true; }
 }

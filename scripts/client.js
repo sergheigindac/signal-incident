@@ -11,6 +11,6 @@ if (options.method !== 'GET') {
   JSON.parse(options.body);
   if (process.env.IDEMPOTENCY_KEY) options.headers['idempotency-key'] = process.env.IDEMPOTENCY_KEY;
 }
-const response = await fetch((process.env.API_URL ?? 'http://127.0.0.1:' + process.env.PORT) + path, options);
+const response = await fetch((process.env.API_URL ?? ('http://127.0.0.1:' + (process.env.PORT ?? 4330))) + path, options);
 console.log(JSON.stringify(await response.json(), null, 2));
 if (!response.ok) process.exitCode = 1;
