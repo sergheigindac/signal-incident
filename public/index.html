@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Signal Incident</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#workspace">Skip to workspace</a>
+  <header>
+    <div><p class="eyebrow">OPERATIONS WORKSPACE</p><h1>Signal Incident</h1></div>
+    <span id="connection" role="status">Disconnected</span>
+  </header>
+  <main>
+    <section class="intro"><h2>Keep work moving.</h2><p>Heartbeat monitoring, incident timelines, maintenance windows, and service reliability reports.</p></section>
+    <form id="connect" class="connection">
+      <label for="token">API access token</label>
+      <input id="token" type="password" required minlength="24" autocomplete="off" placeholder="Enter your server token">
+      <button type="submit">Connect</button>
+      <button type="button" id="disconnect" class="secondary">Disconnect</button>
+      <small>The token stays in this page's memory and is cleared on reload.</small>
+    </form>
+    <div id="feedback" role="status" aria-live="polite"></div>
+    <div class="layout" id="workspace">
+      <nav aria-label="Operations"><h2>Operations</h2><div id="operations"></div></nav>
+      <section class="panel" aria-labelledby="operation-title">
+        <p class="eyebrow" id="method">SELECT AN OPERATION</p>
+        <h2 id="operation-title">Your operational control room</h2>
+        <p id="operation-description">Connect to load available actions and records.</p>
+        <form id="action"><div id="fields"></div><button id="execute" type="submit" disabled>Run operation</button></form>
+        <div class="result-heading"><h3>Result</h3><button id="copy" type="button" class="secondary">Copy JSON</button></div>
+        <div id="table"></div>
+        <details><summary>Response JSON</summary><pre id="result">No operation has run yet.</pre></details>
+      </section>
+    </div>
+    <section class="panel activity"><div class="result-heading"><h2>Recent activity</h2><button id="refresh" type="button" class="secondary">Refresh activity</button></div><ol id="events"></ol></section>
+  </main>
+  <footer>Signal Incident · Single-tenant operations · <a href="https://github.com/sergheigindac/signal-incident">Source &amp; documentation</a></footer>
+</body>
+</html>
