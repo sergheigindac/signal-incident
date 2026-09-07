@@ -4,6 +4,7 @@ COPY package.json ./
 COPY src ./src
 COPY public ./public
 COPY client ./client
+COPY examples ./examples
 COPY test ./test
 COPY scripts ./scripts
 COPY docs ./docs
