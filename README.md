@@ -98,6 +98,8 @@ Tests cover transaction rollback, persistence, online backups, schema boundaries
 - [Operational runbook](docs/operations.md)
 - [Design decisions](docs/decisions.md)
 - [Development guide](CONTRIBUTING.md)
+- [Runnable client workflow](examples/README.md)
+- [Guided implementation workshop](docs/workshop.md)
 - [Client usage](client/README.md)
 - [OpenAPI contract](docs/openapi.json)
 
